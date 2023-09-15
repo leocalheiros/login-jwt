@@ -1,5 +1,4 @@
 import pytest
-from flask import request
 from src.server import app
 from src.auth_jwt.token_handler.token_creator import TokenCreator
 from src.config.jwt_config_file import jwt_config
