@@ -27,16 +27,19 @@ def token_verify(function: callable) -> callable:
         except jwt.InvalidSignatureError:
             return jsonify({
                 'error': 'Token inválido'
-            })
+            }), 401
         except jwt.ExpiredSignatureError:
             return jsonify({
                 'error': 'Token expirado'
-            })
+            }), 401
         except KeyError as e:
             return jsonify({
                 'error': 'Token invalido2'
-            })
-
+            }), 401
+        except jwt.exceptions.DecodeError:
+            return jsonify({
+                'error': 'Token inválido!'
+            }), 401
         if int(token_uid) != int(uid):
             return jsonify({
                 'error': 'User não permitido'
